@@ -14,3 +14,5 @@ let insertCharacters = (text, characters, ~startIndex=0, ()) => {
 
   text
 }
+
+let getCharacters = text => text->toNode->Figma_Node.getCharacters

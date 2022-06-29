@@ -7,14 +7,15 @@ Renderer.cleanup()
 
 figma
 ->loadFontAsync(loadFontAsyncOptions(~family="Inter", ~style="Regular"))
-->thenResolve(_ => figma->getCurrentPage->Validator.do)
-->thenResolve(results => {
-  let resultCount = results->Array.length
-  if resultCount > 0 {
-    results->Array.forEach(Renderer.do)
-    figma->closePluginWithMessage(`There is ${resultCount->Int.toString} issue(s).`)
-  } else {
-    figma->closePluginWithMessage("Looks good to me!")
+->thenResolve(_ => {
+  let results = Validator.do()
+
+  switch results->Array.length {
+  | 0 => figma->closePluginWithMessage("Looks good to me!")
+  | count => {
+      results->Array.forEach(Renderer.do)
+      figma->closePluginWithMessage(`There is ${count->Int.toString} issue(s).`)
+    }
   }
 })
 ->ignore

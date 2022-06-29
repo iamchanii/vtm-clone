@@ -5,9 +5,11 @@ type _type = [#PAGE | #TEXT | #INSTANCE | #FRAME]
 
 @get @return(nullable) external getMainComponent: t => option<t> = "mainComponent"
 
-@get @return(nullable) external getCharacters: t => option<string> = "characters"
+@get external getCharacters: t => string = "characters"
 
 @get external getName: t => string = "name"
+
+@get external getId: t => string = "id"
 
 @get external getType: t => _type = "type"
 
@@ -62,3 +64,5 @@ type sizingMode = [#FIXED | #AUTO]
 @send external getPluginData: (t, string) => string = "getPluginData"
 
 @send external remove: t => unit = "remove"
+
+@set external setName: (t, string) => unit = "name"

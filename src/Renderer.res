@@ -44,13 +44,28 @@ let do = (result: Validator.result) => {
       ->FrameNode.setPosition(
         ~y={
           let parentFramePaddingTop = parentFrame->FrameNode.toNode->Node.getPaddingTop
-          let instanceNodeHeight = result.node->Node.getHeight
+          let nodeHeight = result.node->Node.getHeight
+          let nodeY = result.node->Node.getY
           let correction = 8 // for looks good ;)
 
-          parentFramePaddingTop + instanceNodeHeight + correction
+          Js.log({
+            "parentFramePaddingTop": parentFramePaddingTop,
+            "nodeHeight": nodeHeight,
+            "nodeY": nodeY,
+            "text": result.node->Node.getCharacters,
+          })
+
+          if nodeY == 0 {
+            parentFramePaddingTop
+          } else {
+            nodeY
+          } +
+          nodeHeight +
+          correction
         },
         (),
       )
+      ->FrameNode.setName(`Comment(s) for ${result.node->Node.getCharacters}`)
       ->ignore
 
       result.comments->Array.forEach(comment => {

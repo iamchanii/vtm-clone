@@ -85,3 +85,9 @@ let appendChild = (frame, node) => {
 
   frame
 }
+
+let setName = (frame, name) => {
+  frame->toNode->Figma_Node.setName(name)
+
+  frame
+}
