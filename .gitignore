@@ -14,3 +14,5 @@ node_modules
 .merlin
 lib
 code.js
+
+.DS_Store
