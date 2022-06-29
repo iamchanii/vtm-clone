@@ -1,4 +1,7 @@
 module Node = Figma_Node
+module FrameNode = Figma_FrameNode
+module TextNode = Figma_TextNode
+module Util = Figma_Util
 
 type figma
 @val external figma: figma = "figma"
@@ -28,8 +31,8 @@ type eventType = [#currentpagechange]
 /**
  * https://www.figma.com/plugin-docs/api/properties/figma-createrectangle
  */
-@send external createFrame: figma => Node.t = "createFrame"
-@send external createText: figma => Node.t = "createText"
+@send external createFrame: figma => FrameNode.t = "createFrame"
+@send external createText: figma => TextNode.t = "createText"
 
 /**
  * https://www.figma.com/plugin-docs/api/properties/figma-loadfontasync/

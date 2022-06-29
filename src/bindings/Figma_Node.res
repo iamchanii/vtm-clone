@@ -56,5 +56,4 @@ type sizingMode = [#FIXED | #AUTO]
 @set external setPaddingBottom: (t, int) => unit = "paddingBottom"
 @get external getPaddingBottom: t => int = "paddingBottom"
 
-// TODO
-@set external setFills: (t, array<'a>) => unit = "fills"
+@set external setFills: (t, array<Figma_Util.SolidPaint.t>) => unit = "fills"

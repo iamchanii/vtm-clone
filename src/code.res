@@ -6,8 +6,9 @@ figma->skipInvisibleInstanceChildren(true)
 figma
 ->loadFontAsync(loadFontAsyncOptions(~family="Inter", ~style="Regular"))
 ->thenResolve(_ => {
-  figma->getCurrentPage->Validator.do->Array.forEach(Validator.draw)
+  figma->getCurrentPage->Validator.do
 })
+->thenResolve(results => results->Array.forEach(Renderer.do))
 ->thenResolve(_ => {
   figma->closePluginWithMessage("Completed")
 })

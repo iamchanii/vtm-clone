@@ -1,6 +1,6 @@
 open Figma
 
-type validateResult = {
+type result = {
   node: Node.t,
   comments: array<string>,
 }
@@ -37,63 +37,4 @@ let validateHeadingText = node => {
 
 let do = node => {
   [validateHeadingText]->Array.map(validate => node->validate)->Array.concatMany
-}
-
-let rec getParentFrame = node => {
-  if node->Node.getType == #FRAME {
-    Some(node)
-  } else {
-    switch node->Node.getParent {
-    | Some(parent) => parent->getParentFrame
-    | _ => None
-    }
-  }
-}
-
-let draw = result => {
-  let frame = figma->createFrame
-  let parentFrame = result.node->getParentFrame->Option.getExn
-  parentFrame->Node.appendChild(frame)
-  frame->Node.setLayoutPositioning(#ABSOLUTE)
-
-  frame->Node.setLayoutMode(#VERTICAL)
-  frame->Node.setLayoutAlign(#STRETCH)
-  frame->Node.setPrimaryAxisSizingMode(#AUTO)
-  frame->Node.setCounterAxisSizingMode(#AUTO)
-  frame->Node.setItemSpacing(2)
-  frame->Node.setPaddingLeft(6)
-  frame->Node.setPaddingRight(6)
-  frame->Node.setPaddingTop(6)
-  frame->Node.setPaddingBottom(6)
-  frame->Node.setFills([
-    {
-      "type": "SOLID",
-      "color": {
-        "r": 247.0 /. 255.0,
-        "g": 103.0 /. 255.0,
-        "b": 7.0 /. 255.0,
-      },
-    },
-  ])
-  Js.log(`result height: ${result.node->Node.getHeight->Int.toString}`)
-  Js.log(`result y: ${result.node->Node.getY->Int.toString}`)
-  frame->Node.setY(
-    parentFrame->Node.getPaddingTop + result.node->Node.getY + result.node->Node.getHeight,
-  )
-
-  result.comments->Array.forEach(comment => {
-    let text = figma->createText
-    text->Node.insertCharacters(0, comment)
-    text->Node.setFills([
-      {
-        "type": "SOLID",
-        "color": {
-          "r": 1,
-          "g": 1,
-          "b": 1,
-        },
-      },
-    ])
-    frame->Node.appendChild(text)
-  })
 }
