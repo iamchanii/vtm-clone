@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  
+  "[rescript]": {
+    "editor.defaultFormatter": "chenglou92.rescript-vscode"
+  }
+}

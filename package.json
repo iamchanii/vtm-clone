@@ -1,0 +1,15 @@
+{
+  "name": "vtm-clone",
+  "version": "0.1.0",
+  "license": "MIT",
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "re:build": "rescript",
+    "re:start": "rescript build -w",
+    "bundle": "esbuild lib/es6/src/code.mjs --bundle --format=esm --outfile=code.js --minify"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.47",
+    "rescript": "^9.1.4"
+  }
+}
