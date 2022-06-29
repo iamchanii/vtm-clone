@@ -12,5 +12,6 @@
   "bsc-flags": ["-open Belt"],
   "js-post-build": {
     "cmd": "./bundle.js"
-  }
+  },
+  "bs-dependencies": ["@ryyppy/rescript-promise"]
 }

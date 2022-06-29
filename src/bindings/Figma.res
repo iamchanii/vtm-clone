@@ -24,3 +24,17 @@ type eventType = [#currentpagechange]
  */
 @send external closePlugin: figma => unit = "closePlugin"
 @send external closePluginWithMessage: (figma, string) => unit = "closePlugin"
+
+/**
+ * https://www.figma.com/plugin-docs/api/properties/figma-createrectangle
+ */
+@send external createFrame: figma => Node.t = "createFrame"
+@send external createText: figma => Node.t = "createText"
+
+/**
+ * https://www.figma.com/plugin-docs/api/properties/figma-loadfontasync/
+ */
+type loadFontAsyncOptions
+@obj external loadFontAsyncOptions: (~family: string, ~style: string) => loadFontAsyncOptions = ""
+@send
+external loadFontAsync: (figma, loadFontAsyncOptions) => Promise.t<unit> = "loadFontAsync"

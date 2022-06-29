@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@ryyppy/rescript-promise@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@ryyppy/rescript-promise@npm:2.1.0"
+  checksum: 47761ce48800e3e169d2fc6d0d381a15dd7a724e3d7a31297b5cffec30273d46f310dd9f96452fc027523950d4ab5c02a1a21d94bb06190070a30bcfc2783308
+  languageName: node
+  linkType: hard
+
 "esbuild-android-64@npm:0.14.47":
   version: 0.14.47
   resolution: "esbuild-android-64@npm:0.14.47"
@@ -232,6 +239,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vtm-clone@workspace:."
   dependencies:
+    "@ryyppy/rescript-promise": ^2.1.0
     esbuild: ^0.14.47
     rescript: ^9.1.4
   languageName: unknown
