@@ -22,10 +22,8 @@ module DefaultRuleConfig = {
 }
 
 module Rule = (RuleConfig: RuleConfig) => {
-  let do = () => {
-    figma
-    ->getCurrentPage
-    ->Node.findAllWithCriteria(Node.findAllWithCriteriaOptions(~types=[#TEXT]))
+  let do = nodes => {
+    nodes
     ->Array.keepMap(RuleConfig.predicate)
     ->Array.keepMap(node => {
       let characters = node->RuleConfig.getCharacters
@@ -75,7 +73,11 @@ let do = () => {
 
   let result = ref(Set.make(~id=module(ResultPairComparator)))
 
-  [HeadingTextRule.do(), TextRule.do()]
+  let textNodes =
+    figma->getCurrentPage->Node.findAllWithCriteria(Node.findAllWithCriteriaOptions(~types=[#TEXT]))
+
+  [HeadingTextRule.do, TextRule.do]
+  ->Array.map(fn => textNodes->fn)
   ->Array.concatMany
   ->Array.forEach(validationResult =>
     switch result.contents->Set.has(validationResult) {

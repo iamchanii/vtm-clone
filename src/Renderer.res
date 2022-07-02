@@ -16,6 +16,7 @@ open Figma
 )
 
 let do = (result: Validator.result) => {
+  // TODO: Reuse comment frame if it exists.
   switch result.node->getParentFrame {
   | None => Js.Console.warn(`Node's parent frame is not exist. skipped.`)
   | Some(parentFrame) => {
